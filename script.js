@@ -2,11 +2,14 @@ let divsToAdd;
 let divCurrentRow;
 const container = document.querySelector(".container");
 
-for (let i = 0; i < 16; i++) {
+let numberOfItems = 16;
+
+for (let i = 0; i < numberOfItems; i++) {
     divCurrentRow = document.createElement("div");
     container.append(divCurrentRow);
-    for (let k = 0; k < 16; k++) {
+    for (let k = 0; k < numberOfItems; k++) {
         divsToAdd = document.createElement("div");
+        divsToAdd.classList.add("colorable");
         divsToAdd.style.border = "1px solid gray";
         divsToAdd.style.flex = "0 0 5%";
         divsToAdd.style.width = "25px";
@@ -15,14 +18,15 @@ for (let i = 0; i < 16; i++) {
     }
 }
 
-/*
-Set up a “hover” effect so that the grid divs change color when your mouse passes over them, leaving a (pixelated) trail through your grid like a pen would.
--Hint: “Hovering” is what happens when your mouse enters a div and ends when your mouse leaves it.
-You can set up event listeners for either of those events as a starting point.
--There are multiple ways to change the color of the divs, including:
-adding a new class to the div.
--changing the div’s background color using JavaScript.
+let colorableItems = document.querySelectorAll(".colorable");
 
+colorableItems.forEach(element => {
+    element.addEventListener("mouseover", e => {
+        element.style.backgroundColor = "black";
+    })
+});
+
+/*
 Add a button to the top of the screen that will send the user a popup asking for
 the number of squares per side for the new grid. Once entered,
 the existing grid should be removed and a new grid should be generated in the same total space as before (e.g. 960px wide)

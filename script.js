@@ -19,12 +19,12 @@ function createGrid() {
         }
     }
     giveColor();
+    resizeGrid();
 }
 createGrid();
 
 
 function giveColor() {
-
     colorableItems = document.querySelectorAll(".colorable");
 
     colorableItems.forEach(element => {
@@ -32,11 +32,42 @@ function giveColor() {
             element.style.backgroundColor = "black";
         })
     });
-
-    resizeGrid();
 }
 giveColor();
 
+function removeColor() {
+    colorableItems = document.querySelectorAll(".colorable");
+
+    colorableItems.forEach(element => {
+        element.addEventListener("mouseover", e => {
+            element.style.backgroundColor = "white";
+        })
+    });
+}
+
+function randomColor() {
+    colorableItems = document.querySelectorAll(".colorable");
+
+    colorableItems.forEach(element => {
+        element.addEventListener("mouseover", e => {
+            let generatedColors = generateRandomColor();
+
+            let red = generatedColors[0];
+            let green = generatedColors[1];
+            let blue = generatedColors[2];
+
+            element.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+        })
+    });
+}
+
+function generateRandomColor() {
+    let r = Math.floor(Math.random() * (255 + 1));
+    let g = Math.floor(Math.random() * (255 + 1));
+    let b = Math.floor(Math.random() * (255 + 1));
+
+    return [r, g, b];
+}
 
 function resizeGrid() {
     let containerWidth = container.offsetWidth;
@@ -67,9 +98,17 @@ resetButton.addEventListener("click", e => {
     }
 });
 
-/*
-Extra Credit
--Instead of just changing the color of a square from black to white (for example),
-have each pass through with the mouse change it to a completely random RGB value.
-Then try having each pass just add another 10% of black to it so that only after 10 passes is the square completely black.
-*/
+let eraserButton = document.querySelector("#eraser");
+eraserButton.addEventListener("click", e => {
+    removeColor();
+});
+
+let blackButton = document.querySelector("#blackColor");
+blackButton.addEventListener("click", e => {
+    giveColor();
+});
+
+let randomButton = document.querySelector("#randomColor");
+randomButton.addEventListener("click", e => {
+    randomColor();
+});

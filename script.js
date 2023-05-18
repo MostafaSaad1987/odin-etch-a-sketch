@@ -12,8 +12,6 @@ for (let i = 0; i < numberOfItems; i++) {
         divsToAdd.classList.add("colorable");
         divsToAdd.style.border = "1px solid gray";
         divsToAdd.style.flex = "0 0 5%";
-        divsToAdd.style.width = "25px";
-        divsToAdd.style.height = "25px";
         divCurrentRow.append(divsToAdd);
     }
 }
@@ -25,6 +23,19 @@ colorableItems.forEach(element => {
         element.style.backgroundColor = "black";
     })
 });
+
+function resizeGrid() {
+    let containerWidth = container.offsetWidth;
+    let cellSize = Math.floor(containerWidth / numberOfItems);
+    
+    colorableItems.forEach(element => {
+        element.style.width = cellSize + "px";
+        element.style.height = cellSize + "px";
+    });
+}
+
+window.addEventListener("resize", resizeGrid);
+resizeGrid();
 
 /*
 Add a button to the top of the screen that will send the user a popup asking for

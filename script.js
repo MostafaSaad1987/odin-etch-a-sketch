@@ -112,3 +112,17 @@ let randomButton = document.querySelector("#randomColor");
 randomButton.addEventListener("click", e => {
     randomColor();
 });
+
+const colorPicker = document.querySelector("#colorPicker");
+
+colorPicker.addEventListener("input", (event) => {
+    colorableItems = document.querySelectorAll(".colorable");
+
+    colorPicker.style.backgroundColor = colorPicker.value;
+
+    colorableItems.forEach(element => {
+        element.addEventListener("mouseover", e => {
+            element.style.backgroundColor = colorPicker.value;
+        })
+    });
+});
